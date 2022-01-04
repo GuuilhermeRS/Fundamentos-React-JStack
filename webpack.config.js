@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
+  mode: 'development',
   entry: path.resolve(__dirname, 'src', 'index.js'),
   output: {
     path: path.resolve(__dirname, 'build'),
@@ -23,7 +24,10 @@ module.exports = {
       }
 
 
-      
+
     ]
   },
+  devServer: {
+    port:3000,
+  }
 };
