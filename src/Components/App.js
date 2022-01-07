@@ -5,11 +5,21 @@ import Post from './Post';
 
 
 function App() {
+  const [theme, setTheme] = useState('dark');
+
   const [posts, setPosts] = useState([
     { id: Math.random(), title: 'Title#01', subtitle: 'Sub#01', likes: 20, read: false },
     { id: Math.random(), title: 'Title#02', subtitle: 'Sub#02', likes: 50, read: true },
     { id: Math.random(), title: 'Title#03', subtitle: 'Sub#03', likes: 10, read: false },
   ]);
+
+  function handleToggleTheme() {
+    setTheme((prevState) => (
+      prevState === 'dark'
+      ? 'light'
+      : 'dark'
+    ));
+  }
 
   function handleRefresh() {
     setPosts((prevState) => [
@@ -19,6 +29,7 @@ function App() {
         title: `Title#0${prevState.length + 1}`,
         subtitle: `Subtitle#0${prevState.length + 1}`,
         likes: 50,
+        read: false,
       }
     ]);
   }
@@ -31,7 +42,10 @@ function App() {
 
   return (
     <>
-      <Header>
+      <Header
+      theme={theme}
+        onToggleTheme={handleToggleTheme}
+      >
         <h2>
           Posts da semana
           <button onClick={handleRefresh}>Atualizar</button>
@@ -44,13 +58,8 @@ function App() {
         <Post 
           key={post.id}
           onRemove={handleRemovePost}
-          post={{
-            id: post.id,
-            read: post.read,
-            title: post.title,
-            subtitle: post.subtitle,
-            likes: post.likes
-          }}
+          post={post}
+          theme={theme}
         />
       ))}    
     </>

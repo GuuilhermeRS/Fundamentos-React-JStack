@@ -1,16 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import PostHeader from './PostHeader';
 
 export default function Post(props) {
   return (
     <>
       <article>
-        <strong>
-          {props.post.read ? <s>{props.post.title}</s> : props.post.title}
-        </strong>
-        <button onClick={() => props.onRemove(props.post.id)}>
-          Remover
-        </button>
+        <PostHeader
+          theme={props.theme}
+          onRemove={props.onRemove}
+          post={{
+            id: props.post.id,
+            title: props.post.title,
+            read: props.post.read
+          }}
+        />
         <br/>
         <small>{props.post.subtitle}</small>
         <br />
@@ -22,6 +26,7 @@ export default function Post(props) {
 }
 
 Post.propTypes = {
+  theme: PropTypes.string.isRequired,
   onRemove: PropTypes.func.isRequired,
   post: PropTypes.shape({
     id: PropTypes.number.isRequired,
