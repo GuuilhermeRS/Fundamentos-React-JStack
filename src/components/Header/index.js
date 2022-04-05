@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { Container } from './styles';
 
-export default function Header({ onToggleTheme, selectedTheme }) {
+import { ThemeContext } from '../../ThemeContext';
+
+export default function Header() {
+
+  const { theme, onToggleTheme } = useContext(ThemeContext);
+
   return (
     <Container>
       <h1>JStack's Blog</h1>
@@ -10,7 +15,7 @@ export default function Header({ onToggleTheme, selectedTheme }) {
         type="button"
         onClick={onToggleTheme}
       >
-        {selectedTheme === 'dark' ? '🌞' : '🌚'}
+        {theme === 'dark' ? '🌞' : '🌚'}
       </button>
     </Container>
   );
